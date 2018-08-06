@@ -1,0 +1,91 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(auto-fill, 150px);
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
+  background-color: rgb(201, 242, 203);
+}
+
+.container_box {
+  overflow: hidden;
+  background-color: rgb(237, 241, 247);
+}
+
+.friend_comments {
+    display: none;
+    background-color: rgb(235, 225, 239);
+}
+
+/* The Modal (background) */
+.park_description, .park_review {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.park_description_content, .park_review_content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hidden_name {
+    display: none;
+}
+
+.user_list {
+    position: absolute;
+    right: 0;
+}
+
+.friend_comments {
+    display:inline-block;
+    margin-left:100px;
+}
+
+#park_form {
+    display:inline-block;
+    margin-left: 50px;
+    margin-right:40px;
+}
+
+#friend_form {
+    display:inline-block;
+    width:200px;
+}
+
+#list_of_friends {
+    display:inline-block;
+    margin-left: 50px;
+}
+
+h2 {
+    text-align: center;
+}

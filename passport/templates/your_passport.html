@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block body %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Your NPS Passport</h2>
+<div class="container">
+{% for entry in your_park %}
+<div class="container_box">
+{{entry.park_name}}
+<!-- Trigger/Open The Modal -->
+<div class="my_button"><button>Click for more information!</button></div>
+<!-- The Modal -->
+<div class="park_description">
+  <!-- Modal content -->
+  <div class="park_description_content">
+    <span class="close">&times;</span>
+    <h2>{{entry.park_name}}</h2>
+    <p>{{entry.park_description}}</p>
+  </div>
+</div>
+
+<form action="{% url 'remove_from_passport' %}" method="post" >
+    {% csrf_token %}
+    <button name="entry_id" value={{entry.id}}>Remove from passport</button>
+</form>
+
+<div class="my_button"><button>Leave a review!</button></div>
+<!-- The Modal -->
+<div class="park_review">
+  <!-- Modal content -->
+  <div class="park_review_content">
+    <span class="close">&times;</span>
+    {% for item in park_reviews %}
+    {% if item.park_name == entry.park_name %}
+    <li>"{{item.review}}" -- {{item.username}}</li>
+    {% endif %}
+    {% endfor %}
+    <br>
+    <form action="{% url 'submit_review' %}" method="post">
+      {% csrf_token %}
+      <input name="form_review">
+      <input class="hidden_name" name="park_name" value= "{{entry.park_name}}">
+      <input type="submit" value="Submit your review!" />
+    </form>
+  </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+<br>
+
+<div id="park_form">
+<form action="{% url 'add_park_information' %}" method="post" >
+    {% csrf_token %}
+<select name="selected_park">
+{% for park in park_names %}
+<option value="{{park}}">{{park}}</option>
+{% endfor %}
+</select>
+<input type="submit" value="Add to passport" />
+</form>
+</div>
+
+<div id="friend_form">
+<form action="{%url 'add_friend' %}" method="post">
+{% csrf_token %}
+<select name="users_not_yet_friend">
+{% for user in users %}
+<option value="{{user.username}}">{{user.username}}</option>
+{% endfor %}
+</select>
+<input type="submit" value="Add a friend!" />
+</form>
+</div>
+
+<br>
+<br>
+    <h2>Your friends -- click on their name to see their reviews!</h2>
+    <div id="list_of_friends">
+    {% for person in friends %}
+    <div class="accordion">
+    <p>{{person.friend}}</p>
+    </div>
+    <div class="friend_comments">
+    {% for comment in park_reviews %}
+    {% if person.friend == comment.username %}
+    <li><b>{{comment.park_name}}</b> -- {{comment.review}}</li>
+    <br>
+    {% endif %}
+    {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
