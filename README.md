@@ -6,6 +6,17 @@ This app lets a user add a park from the National Park Service (NPS) to their "p
 see reviews of the park, and add friends (which lets them directly see their friends reviews). It is built using Python/Django, with
 Javascript for pop-up boxes and CSS for a cleaner look-and-feel.
 
+The Python functions are commented on in the code, but, in summary, they allow users to:
+
+-- Sign-up (def signup), login (def login_view), and logout (def logout_view)
+
+-- Add parks to their "passport" (def your_passport)
+
+-- Once a park is in the passport, they can click to see a more detailed description of the park (JS), see reviews of the park (JS),
+add their own review (def submit_revew), and remove it from their passport (def remove_from_passport).
+
+-- They can add a friend from the list of users (def add_friend) and click on their friends to see their reviws (JS).
+
 The biggest thing I could not figure out that I kept struggling with was Python's messages when returning a redirect/reverse.
 You can see the code I left in for it views.py (which should render the templare in your_passport.html) and one attempt that does not
 render the message in the error message of add_park_information. The code doesn't throw me any error and otherwise functions (the

@@ -3,15 +3,16 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
-<h2>Your NPS Passport</h2>
+
+<h2>{{username}}'s NPS Passport</h2>
 <div class="container">
 {% for entry in your_park %}
 <div class="container_box">
-{{entry.park_name}}
+<h4>{{entry.park_name}}</h4>
 <!-- Trigger/Open The Modal -->
 <div class="my_button"><button>Click for more information!</button></div>
 <!-- The Modal -->
@@ -35,6 +36,7 @@
   <!-- Modal content -->
   <div class="park_review_content">
     <span class="close">&times;</span>
+    <h3>Other user reviews</h3>
     {% for item in park_reviews %}
     {% if item.park_name == entry.park_name %}
     <li>"{{item.review}}" -- {{item.username}}</li>
@@ -84,7 +86,7 @@
     <div id="list_of_friends">
     {% for person in friends %}
     <div class="accordion">
-    <p>{{person.friend}}</p>
+    <h4>{{person.friend}}</h4>
     </div>
     <div class="friend_comments">
     {% for comment in park_reviews %}

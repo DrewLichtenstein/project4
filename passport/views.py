@@ -108,6 +108,8 @@ def add_friend(request):
     f.save()
     return HttpResponseRedirect(reverse("your_passport"))
 
+# when the "Remove from Passport" is clicked, the park is removed from the user's passport (e.g. removed from the
+# database)
 def remove_from_passport(request):
     entry_id = request.POST["entry_id"]
     park_to_remove = Your_Park.objects.get(pk=entry_id)
